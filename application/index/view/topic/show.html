@@ -1,0 +1,121 @@
+<div class="main-box site-topic-detail">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/')}">首页</a></li>
+        <li>
+            <a href="{:url('forum/show',['id'=>$topic['forum']['forum_id']])}">{$topic.forum.title}</a>
+        </li>
+        <li class="active">{$topic.title}</li>
+    </ol>
+    <div class="clearfix">
+        <a href="{:url('topic/publish',['forum_id'=>$topic['forum_id']])}" class="btn btn-default">发表新帖</a>
+        <a href="{:url('topic/reply',['topic_id'=>$topic['topic_id']])}" class="btn btn-default">回复本帖</a>
+    </div>
+    <!--楼主-->
+    <div class="thread-list">
+        <eq name="firstPage" value="1">
+            <div class="clearfix thread-item">
+                <div class="col-md-2 thread-user">
+                    <div>
+                        查看: <strong class="text-primary">{$topic.view_count}</strong>
+                        回复: <strong class="text-primary">{$topic.reply_count}</strong>
+                    </div>
+                    <!--用户-->
+                    <div>
+                        <div class="nickname">
+                            <empty name="topic.user.nickname">
+                                无昵称
+                                <else/>
+                                {$topic.user.nickname}
+                            </empty>
+                        </div>
+                        <img src="{$topic.user.avatar}" class="img-with-placeholder" width="100" height="100" alt="">
+                        <div>UID: {$topic.user_id}</div>
+                        <div>帖子: {$topic.user.thread_count}</div>
+                        <div>积分: {$topic.user.score}</div>
+                    </div>
+                </div>
+                <div class="col-md-10 thread-content">
+                    <h1 class="thread-title">
+                        <eq name="topic.top" value="1">
+                            <strong class="text-danger">[置顶]</strong>
+                        </eq>
+                        {$topic.title}
+                    </h1>
+                    <p>
+                        <small>发表于{$topic.created_at}</small>
+                        <eq name="canAccess" value="1">
+                            <small><a href="{:url('topic/update',['id'=>$topic['topic_id']])}">编辑</a></small>
+                            <small><a href="{:url('topic/delete',['id'=>$topic['topic_id']])}" onclick="return confirm('确定操作嘛?')">删除</a></small>
+                        </eq>
+                    </p>
+                    <neq name="topic.created_at" value="$topic.updated_at">
+                        <p class="text-center text-muted">
+                            <small>本帖最后编辑时间{$topic.updated_at}</small>
+                        </p>
+                    </neq>
+                    <div class="content">
+                        <eq name="canView" value="1">
+                            {$topic.content}
+                            <else/>
+                            作者设置了回复后可见
+                        </eq>
+                    </div>
+                    <hr>
+                    <!--                操作-->
+                    <notempty name="Think.session.user">
+                        <eq name="isFavorite" value="1">
+                            <a href="{:url('topic/unfavorite',['id'=>$topic['topic_id']])}">取消收藏</a>
+                            <else/>
+                            <a href="{:url('topic/favorite',['id'=>$topic['topic_id']])}">收藏</a>
+                        </eq>
+                        <eq name="isAdmin" value="1">
+                            <eq name="topic.top" value="1">
+                                <a href="{:url('topic/untop',['id'=>$topic['topic_id']])}" onclick="return confirm('确认操作吗?')">取消置顶</a>
+                                <else/>
+                                <a href="{:url('topic/top',['id'=>$topic['topic_id']])}" onclick="return confirm('确认操作吗?')">置顶</a>
+                            </eq>
+                        </eq>
+                    </notempty>
+                </div>
+            </div>
+        </eq>
+        <volist name="replies" id="reply">
+            <div class="clearfix thread-item">
+                <div class="col-md-2 thread-user">
+                    <!--用户-->
+                    <div>
+                        <div class="nickname">
+                            <empty name="reply.user.nickname">
+                                无昵称
+                                <else/>
+                                {$reply.user.nickname}
+                            </empty>
+                        </div>
+                        <img src="{$reply.user.avatar}" class="img-with-placeholder" width="100" height="100" alt="">
+                        <div>UID: {$reply.user_id}</div>
+                        <div>帖子: {$reply.user.thread_count}</div>
+                        <div>积分: {$reply.user.score}</div>
+                    </div>
+                </div>
+                <div class="col-md-10 thread-content">
+                    <p>
+                        <small>发表于{$reply.created_at}</small>
+                        <eq name="isAdmin" value="1">
+                          </eq>
+                        <if condition="$isAdmin OR $userId == $reply['user_id']">
+                            <small><a href="{:url('reply/update',['id'=>$reply['reply_id']])}">编辑</a></small>
+                            <small><a href="{:url('reply/delete',['id'=>$reply['reply_id']])}" onclick="return confirm('确定操作嘛?')">删除</a></small>
+                        </if>
+                    </p>
+                    <neq name="reply.created_at" value="$reply.updated_at">
+                        <p class="text-center text-muted">
+                            <small>本帖最后编辑时间{$reply.updated_at}</small>
+                        </p>
+                    </neq>
+                    <div class="content">{$reply.content}</div>
+                </div>
+            </div>
+        </volist>
+    </div>
+    {$replies->render()}
+</div>

@@ -1,0 +1,67 @@
+<div class="main-box">
+    <h2 class="section-title">版块列表</h2>
+    <empty name="forums">
+        <p>暂时没有版块</p>
+        <else/>
+        <div class="clearfix">
+            <volist name="forums" id="item">
+                <div class="media col-md-4 media-inline media-middle forum-item forum-item-bordered">
+                    <div class="media-left">
+                        <a href="{:url('forum/show',['id'=>$item['forum_id']])}">
+                            <img src="{$item.logo}" width="64" height="64" class="media-object" alt="">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a href="{:url('forum/show',['id'=>$item['forum_id']])}">{$item.title}</a>
+                        </h4>
+                        <p>
+                            {$item.desc} <br>
+                            主题: {$item.topic_count} 回复: {$item.thread_count} <br>
+                        </p>
+                    </div>
+                </div>
+            </volist>
+        </div>
+    </empty>
+    <h2 class="section-title">最新主题</h2>
+    <empty name="topics">
+        <p>暂时没有主题</p>
+        <else/>
+        <div class="table-responsive index-topic-list">
+            <table class="table">
+                <tr>
+                    <td width="60%">标题</td>
+                    <td width="15%">作者</td>
+                    <td width="15%">回复/查看</td>
+                    <td width="10%">版块</td>
+                </tr>
+                <volist name="topics" id="topic">
+                    <tr>
+                        <td>
+                            <a href="{:url('topic/show',['id'=>$topic['topic_id']])}">
+                                <eq name="topic.top" value="1">
+                                    <strong class="text-danger">[置顶]</strong>
+                                </eq>
+                                {$topic.title}
+                            </a>
+                        </td>
+                        <td>
+                            <empty name="topic.user.nickname">
+                                无昵称
+                                <else/>
+                                {$topic.user.nickname}
+                            </empty>
+                            <br>
+                            {$topic.created_at}
+                        </td>
+                        <td>{$topic.reply_count}/{$topic.view_count}</td>
+                        <td>
+                            <a href="{:url('forum/show',['id'=>$topic['forum_id']])}">{$topic.forum.title}</a>
+                        </td>
+                    </tr>
+                </volist>
+            </table>
+        </div>
+    </empty>
+</div>

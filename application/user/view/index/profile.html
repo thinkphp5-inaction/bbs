@@ -1,0 +1,66 @@
+<div class="main-box">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/user')}">个人中心</a></li>
+        <li class="active">个人资料</li>
+    </ol>
+    <div class="content-box">
+        <form action="{:url('do_profile')}" class="form-horizontal" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="uid" class="col-md-2 col-md-offset-2 control-label">UID</label>
+                <div class="col-md-4">
+                    <div class="help-block" id="uid">{$user.user_id}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username" class="col-md-2 col-md-offset-2 control-label">账号</label>
+                <div class="col-md-4">
+                    <div class="help-block" id="username">{$user.username}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-md-2 col-md-offset-2 control-label">密码</label>
+                <div class="col-md-4">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="为空则不修改">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nickname" class="col-md-2 col-md-offset-2 control-label">昵称</label>
+                <div class="col-md-4">
+                    <input type="text" id="nickname" name="nickname" class="form-control" value="{$user.nickname}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="avatar" class="col-md-2 col-md-offset-2 control-label">头像</label>
+                <div class="col-md-4">
+                    <div class="help-block">
+                        <img src="{$user.avatar}" class="img-with-placeholder" alt="" width="64" height="64">
+                    </div>
+                    <input type="file" id="avatar" name="avatar" accept="image/*" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="score" class="col-md-2 col-md-offset-2 control-label">积分</label>
+                <div class="col-md-4">
+                    <div class="help-block" id="score">{$user.score}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="thread_count" class="col-md-2 col-md-offset-2 control-label">帖子数</label>
+                <div class="col-md-4">
+                    <div class="help-block" id="thread_count">{$user.thread_count}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="login_at" class="col-md-2 col-md-offset-2 control-label">最近登录时间</label>
+                <div class="col-md-4">
+                    <div class="help-block" id="login_at">{$Think.session.user.login.login_at|default=$user['login_at']}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-md-offset-4">
+                    <button class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

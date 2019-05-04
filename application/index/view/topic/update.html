@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="/static/ueditor/themes/default/css/umeditor.min.css">
+<script src="/static/ueditor/umeditor.config.js"></script>
+<script src="/static/ueditor/umeditor.min.js"></script>
+<script type="text/javascript" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+<div class="main-box">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/')}">首页</a></li>
+        <li>
+            <a href="{:url('forum/show',['id'=>$topic['forum']['forum_id']])}">{$topic.forum.title}</a>
+        </li>
+        <li class="active">编辑主题</li>
+    </ol>
+    <div class="content-box">
+        <form action="{:url('do_update',['id'=>$topic['topic_id']])}" class="form-horizontal" method="post">
+            <div class="form-group">
+                <label for="title" class="control-label col-md-1">标题</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="title" value="{$topic.title}" name="title" required placeholder="100字以内">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="content" class="control-label col-md-1">内容</label>
+                <div class="col-md-9">
+                    <textarea name="content" id="content" class="form-control" rows="10">{$topic.content}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-4">
+                    <label>
+                        <input type="checkbox" name="flag" value="1" <eq name="reply_visible" value="1">checked</eq>> 回复后可见
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-4">
+                    <button type="submit" class="btn btn-primary">编辑</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(function () {
+        var editor = UM.getEditor('content', {
+            initialFrameHeight: 300
+        });
+    });
+</script>

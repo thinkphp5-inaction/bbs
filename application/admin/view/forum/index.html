@@ -1,0 +1,33 @@
+<div class="main-box">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/admin')}">管理后台</a></li>
+        <li class="active">版块列表</li>
+    </ol>
+    <div class="content-box">
+        <p><a href="{:url('new')}" class="btn btn-primary">添加版块</a></p>
+        <empty name="list">
+            <p>暂时没有版块。</p>
+            <else/>
+            <div class="row">
+                <volist name="list" id="item">
+                    <div class="media col-md-4 media-inline media-middle forum-item">
+                        <div class="media-left">
+                            <a href="{:url('/index/forum/show',['id'=>$item['forum_id']])}" target="_blank">
+                                <img src="{$item.logo}" width="64" height="64" class="media-object" alt="">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{$item.title}</h4>
+                            <p>
+                                {$item.desc} <br>
+                                主题: {$item.topic_count} 回复: {$item.thread_count} <br>
+                                <a href="{:url('forum/update',['id'=>$item['forum_id']])}">编辑</a>
+                                <a href="{:url('forum/admins',['id'=>$item['forum_id']])}">版主列表</a>
+                            </p>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+        </empty>
+    </div>
+</div>

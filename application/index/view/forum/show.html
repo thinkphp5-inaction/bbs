@@ -1,0 +1,85 @@
+<div class="main-box">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/')}">首页</a></li>
+        <li class="active">{$forum.title}</li>
+    </ol>
+    <h2 class="section-title">版块详情</h2>
+    <div class="content-box">
+        <div class="media">
+            <div class="media-left">
+                <img src="{$forum.logo}" width="64" height="64" class="media-object" alt="">
+            </div>
+            <div class="media-body">
+                <div class="media-heading">{$forum.title}</div>
+                <div>{$forum.desc}</div>
+                <div>主题：{$forum.topic_count} 回复：{$forum.thread_count}</div>
+            </div>
+        </div>
+    </div>
+    <h2 class="section-title">版主列表</h2>
+    <div class="content-box">
+        <empty name="admins">
+            <p>暂时没有版主</p>
+            <else/>
+            <div class="row">
+                <volist name="admins" id="admin">
+                    <div class="media media-inline col-md-3">
+                        <div class="media-left">
+                            <img src="{$admin.user.avatar}" width="40" height="40" class="media-object img-with-placeholder" alt="">
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <empty name="admin.user.nickname">
+                                    无昵称
+                                    <else/>
+                                    {$admin.user.nickname}
+                                </empty>
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+        </empty>
+    </div>
+    <h2 class="section-title">主题列表</h2>
+    <div class="content-box">
+        <p>
+            <a href="{:url('topic/publish',['forum_id'=>$forum['forum_id']])}" class="btn btn-primary">发帖</a>
+        </p>
+        <empty name="topics">
+            <p>暂时没有帖子</p>
+            <else/>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <td width="60%">标题</td>
+                        <td width="25%">作者</td>
+                        <td width="15%">回复/查看</td>
+                    </tr>
+                    <volist name="topics" id="topic">
+                        <tr>
+                            <td>
+                                <a href="{:url('topic/show',['id'=>$topic['topic_id']])}">
+                                <eq name="topic.top" value="1">
+                                    <strong class="text-danger">[置顶]</strong>
+                                </eq>
+                                    {$topic.title}
+                                </a>
+                            </td>
+                            <td>
+                                <empty name="topic.user.nickname">
+                                    无昵称
+                                    <else/>
+                                    {$topic.user.nickname}
+                                </empty>
+                                <br>
+                                {$topic.created_at}
+                            </td>
+                            <td>{$topic.reply_count}/{$topic.view_count}</td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </empty>
+    </div>
+</div>

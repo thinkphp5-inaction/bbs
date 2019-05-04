@@ -1,0 +1,54 @@
+<div class="main-box">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/admin')}">管理后台</a></li>
+        <li class="active">用户管理</li>
+    </ol>
+    <div class="content-box">
+        <form action="" class="form-inline" method="get" style="margin-bottom: 10px;">
+            <input type="search" value="{$Think.get.keyword}" name="keyword" id="keyword" class="form-control" placeholder="搜索昵称">
+            <button type="submit" class="btn btn-primary">搜索</button>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>ID</td>
+                    <td>账号</td>
+                    <td>昵称</td>
+                    <td>头像</td>
+                    <td>注册时间</td>
+                    <td>最后登录</td>
+                    <td>积分</td>
+                    <td>帖子</td>
+                </tr>
+                <volist name="list" id="item">
+                    <tr>
+                        <td>{$item.user_id}</td>
+                        <td>{$item.username}</td>
+                        <td>
+                            <empty name="item.nickname">
+                                无昵称
+                                <else/>
+                                {$item.nickname}
+                            </empty>
+                        </td>
+                        <td>
+                            <img src="{$item.avatar}" class="img-with-placeholder" width="32" height="32" alt="">
+                        </td>
+                        <td>{$item.created_at}</td>
+                        <td>
+                            <empty name="item.login_at">
+                                未登录
+                                <else/>
+                                {$item.login_at} <br>
+                                {$item.login_ip}
+                            </empty>
+                        </td>
+                        <td>{$item.score}</td>
+                        <td>{$item.thread_count}</td>
+                    </tr>
+                </volist>
+            </table>
+        </div>
+        {$list->render()}
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="main-box">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/user')}">个人中心</a></li>
+        <li class="active">回复列表</li>
+    </ol>
+    <div class="content-box">
+        <empty name="list">
+            暂时没有回复
+            <else/>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <td>ID</td>
+                        <td>主题</td>
+                        <td>发表时间</td>
+                        <td>编辑时间</td>
+                        <td>查看/回复</td>
+                        <td>版块</td>
+                        <td>回复时间</td>
+                    </tr>
+                    <volist name="list" id="item">
+                        <tr>
+                            <td>{$item.reply_id}</td>
+                            <td>
+                                <a href="{:url('/index/topic/show',['id'=>$item['topic_id']])}" target="_blank">{$item.topic.title}</a>
+                            </td>
+                            <td>{$item.topic.created_at}</td>
+                            <td>{$item.topic.updated_at}</td>
+                            <td>{$item.topic.view_count}/{$item.topic.reply_count}</td>
+                            <td>
+                                <a href="{:url('index/forum/show',['id'=>$item['forum_id']])}" target="_blank">{$item.forum.title}</a>
+                            </td>
+                            <td>{$item.created_at}</td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+            {$list->render()}
+        </empty>
+    </div>
+</div>

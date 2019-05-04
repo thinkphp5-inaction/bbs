@@ -1,0 +1,36 @@
+<div class="main-box">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/admin')}">管理后台</a></li>
+        <li><a href="{:url('forum/list')}">版块列表</a></li>
+        <li><a href="{:url('forum/admins',['id'=>$forum_id])}">版主列表</a></li>
+        <li class="active">添加版主</li>
+    </ol>
+    <div class="content-box">
+        <empty name="users">
+            <p>暂无用户数据</p>
+            <else/>
+            <div class="row">
+                <volist name="users" id="user">
+                    <div class="media media-inline col-md-3">
+                        <div class="media-left">
+                            <img src="{$user.avatar}" class="img-with-placeholder media-object" width="64" height="64" alt="">
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <empty name="user.nickname">
+                                    未设置昵称
+                                    <else/>
+                                    {$user.nickname}
+                                </empty>
+                            </div>
+                            <div>ID:{$user.user_id}</div>
+                            <div><a onclick="return confirm('确认操作吗?')" href="{:url('do_bindadmin',['id'=>$forum_id,'uid'=>$user['user_id']])}">绑定</a>
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+            {$users->render()}
+        </empty>
+    </div>
+</div>

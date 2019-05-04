@@ -1,0 +1,83 @@
+body {
+  font-size: 14px;
+  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
+  color: #333;
+  background: #F9F9F9;
+}
+.main-box {
+  margin: 56px auto 20px auto;
+}
+.margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.content-box {
+  background: white;
+  border: 1px solid #D4d4d4;
+  padding: 15px;
+}
+.media-inline {
+  margin-top: 0;
+}
+.forum-item {
+  background: white;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.forum-item .media-heading {
+  font-size: 14px;
+}
+.forum-item p {
+  font-size: 12px;
+}
+.forum-item.forum-item-bordered {
+  border: 1px solid #cdcdcd;
+}
+.section-title {
+  font-size: 16px;
+  font-weight: normal;
+  color: #636e7a;
+  text-shadow: #fffeff 0 1px 0;
+}
+.img-with-placeholder {
+  background-color: #dddddd;
+  display: block;
+}
+.site-topic-detail .thread-item {
+  background: white;
+  padding: 0 15px;
+  border: 1px solid #DDDDDD;
+  border-bottom: 0;
+}
+.site-topic-detail .thread-item:last-of-type {
+  border-bottom: 1px solid #DDDDDD;
+}
+.site-topic-detail .thread-item:first-of-type {
+  margin-top: 15px;
+}
+.site-topic-detail .thread-item .thread-user {
+  padding: 15px 0;
+  line-height: 1.5;
+}
+.site-topic-detail .thread-item .thread-content {
+  padding: 15px;
+  border-left: 1px solid #DDDDDD;
+  min-height: 220px;
+}
+.site-topic-detail .thread-item .thread-content .thread-title {
+  font-size: 20px;
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.5;
+}
+.site-topic-detail .thread-item img {
+  max-width: 100%;
+  height: auto;
+}
+.index-topic-list {
+  background: white;
+  border-left: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+}
+/*# sourceMappingURL=style.css.map */

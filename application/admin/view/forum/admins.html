@@ -1,0 +1,33 @@
+<div class="main-box">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/admin')}">管理后台</a></li>
+        <li><a href="{:url('forum/list')}">版块列表</a></li>
+        <li class="active">版主列表</li>
+    </ol>
+    <div class="content-box">
+        <p>
+            <a href="{:url('bindadmin',['id'=>$forum_id])}" class="btn btn-primary">添加版主</a>
+        </p>
+        <div class="row">
+            <volist name="list" id="item">
+                <div class="media media-inline col-md-3">
+                    <div class="media-left">
+                        <img src="{$item.user.avatar}" class="img-with-placeholder media-object" width="64" height="64" alt="">
+                    </div>
+                    <div class="media-body">
+                        <div class="media-heading">
+                            <empty name="item.user.nickname">
+                                未设置昵称
+                                <else/>
+                                {$item.user.nickname}
+                            </empty>
+                        </div>
+                        <div>ID:{$item.user.user_id}</div>
+                        <div><a onclick="return confirm('确认操作吗?')" href="{:url('do_unbindadmin',['id'=>$forum_id,'uid'=>$item['user_id']])}">解绑</a>
+                        </div>
+                    </div>
+                </div>
+            </volist>
+        </div>
+    </div>
+</div>

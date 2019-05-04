@@ -1,0 +1,32 @@
+<div class="main-box">
+    <ol class="breadcrumb">
+        <li><a href="{:url('/user')}">个人中心</a></li>
+        <li class="active">收藏管理</li>
+    </ol>
+    <div class="content-box">
+        <empty name="list">
+            暂时没有收藏
+            <else/>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <td>主题</td>
+                        <td>收藏时间</td>
+                        <td>操作</td>
+                    </tr>
+                    <volist name="list" id="item">
+                        <tr>
+                            <td>
+                                <a href="{:url('/index/topic/show',['id'=>$item['topic_id']])}" target="_blank">{$item.topic.title}</a>
+                            </td>
+                            <td>{$item.created_at}</td>
+                            <td>
+                                <a href="{:url('delete',['topic_id'=>$item['topic_id']])}" onclick="return confirm('确定操作吗?')">删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </empty>
+    </div>
+</div>
