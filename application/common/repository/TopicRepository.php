@@ -29,7 +29,6 @@ class TopicRepository extends Repository
     protected function modelClass()
     {
         return Topic::class;
-
     }
 
     /**
