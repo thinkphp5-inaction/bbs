@@ -12,7 +12,6 @@ use think\console\Input;
 use think\console\input\Argument;
 use think\console\Output;
 use think\Exception;
-use think\exception\DbException;
 
 class RegisterAdminCommand extends Command
 {
